@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
                         ArrayList<User> users = db.getAllUsers();
                         for (User user : users) {
                             if (email.equals(user.getEmail())) {
-                                title = "That email address already registered";
+                                title = "That email address is already registered";
                                 message = "Please select a different email";
                                 break;
                             }

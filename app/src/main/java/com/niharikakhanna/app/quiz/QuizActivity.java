@@ -34,11 +34,10 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         Intent intent = getIntent();
-        loginName = intent.getExtras().getString("fullname").toString();
+        loginName = intent.getExtras().getString("fullname");
         score = intent.getExtras().getInt("score");
-        int position = intent.getExtras().getInt("id");
+        i = intent.getExtras().getInt("id");
 
-        i = position;
 
         mOptionOne = (Button) findViewById(R.id.option1);
         mOptionTwo = (Button) findViewById(R.id.option2);
@@ -55,8 +54,8 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateQuestion();
-                if(!mQuestionBank[i].isSkipped()) {
-                    mQuestionBank[i].setSkipped(true);
+                if(!mQuestionBank[i-1].isSkipped()) {
+                    mQuestionBank[i-1].setSkipped(true);
                     answered++;
                 }
             }
@@ -133,7 +132,7 @@ public class QuizActivity extends AppCompatActivity {
         answered++;
        String answer = mQuestionBank[i].getAnswer();
 
-        int messageResId = 0;
+        int messageResId;
         if(mQuestionBank[i].isSkipped())
             messageResId = R.string.skipped;
         else if (userAnswer.equals(answer)&&!mQuestionBank[i].isCheated()) {
